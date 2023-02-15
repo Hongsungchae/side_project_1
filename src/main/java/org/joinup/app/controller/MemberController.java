@@ -6,15 +6,13 @@ import org.joinup.app.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.lang.reflect.Member;
 import java.util.List;
 
 @Controller
@@ -44,18 +42,24 @@ public class MemberController {
             return "signin";
         }
     }
-//    @PostMapping("/signin")
-//    public String signin(@ModelAttribute MemberVO memberVO, HttpSession session) {
-//        boolean loginResult = memberService.login(memberVO);
-//        if(loginResult){
-//            session.setAttribute("loginEmail", memberVO.getMemberEmail());
-//            return "index";
-//        }else {
-//            return "signin";
-//        }
-//
-//    }
+    @PostMapping("/signin")
+    public String signin(@ModelAttribute MemberVO memberVO, HttpSession session) {
+        boolean loginResult = memberService.login(memberVO);
+        if(loginResult){
+            session.setAttribute("loginEmail", memberVO.getMemberEmail());
+            session.setAttribute("loginid",memberVO.getId());
+            return "index";
+        }else {
+            return "signin";
+        }
 
+    }
+    @GetMapping("/profile")
+    public String profile(@ModelAttribute MemberVO memberVO, HttpSession session) {
+        memberVO = memberService.findByID(Long.parseLong(session.getId()));
+        session.setAttribute("memberName",memberVO.getMemberName());
+        return "profile";
+    }
     @GetMapping("/signin")
     public String signin() {
 

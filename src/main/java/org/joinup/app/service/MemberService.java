@@ -24,13 +24,19 @@ public class MemberService {
         return memberRepository.save(memberVO);
     }
 
-//    public boolean login(MemberVO memberVO) {
-//        MemberVO loginmember = memberRepository.login(memberVO);
-//        if(loginmember!=null){
-//            return true;
-//        }else{
-//            return false;
-//        }
-//
-//    }
+    public boolean login(MemberVO memberVO) {
+        MemberVO loginmember = memberRepository.login(memberVO);
+        if(loginmember!=null){
+            //조회 시 있을 경우
+            return true;
+        }else{
+            //조회 시 없을 경우
+            return false;
+        }
+
+    }
+
+    public MemberVO findByID(Long id) {
+        return memberRepository.findByid(id);
+    }
 }

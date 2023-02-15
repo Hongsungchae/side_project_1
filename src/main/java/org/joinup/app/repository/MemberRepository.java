@@ -14,8 +14,12 @@ public class MemberRepository {
         return sql.insert("Member.save", memberVO);
     }
 
-//    public MemberVO login(MemberVO memberVO) {
-//
-//
-//    }
+    public MemberVO login(MemberVO memberVO) {
+
+        return sql.selectOne("Member.login", memberVO);
+    }
+
+    public MemberVO findByid(Long id) {
+        return sql.selectOne("Member.findById", id);
+    }
 }

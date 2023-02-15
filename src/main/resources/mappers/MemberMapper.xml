@@ -13,4 +13,10 @@
         insert into member_table(memberEmail,memberPassword,memberName)
         values (#{memberEmail},#{memberPassword},#{memberName});
     </insert>
+    <select id="login" parameterType="org.joinup.app.domain.MemberVO" resultType="org.joinup.app.domain.MemberVO">
+        select * from member_table where memberEmail = #{memberEmail} and memberPassword=#{memberPassword}
+    </select>
+    <select id="findById" parameterType="Long" resultType="org.joinup.app.domain.MemberVO">
+        select * from member_table where id = #{id}
+    </select>
 </mapper>
