@@ -51,17 +51,7 @@ public class MainController {
         return "form";
     }
 
-    @GetMapping("/signin")
-    public String signin() {
 
-        return "signin";
-    }
-
-    @GetMapping("/signup")
-    public String signup() {
-
-        return "signup";
-    }
 
     @GetMapping("/table")
     public String table() {

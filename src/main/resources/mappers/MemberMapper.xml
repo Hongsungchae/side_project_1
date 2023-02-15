@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="org.joinup.app.mapper.MemberMapper">
-    <select id="getMember" resultType="MemberVO">
-        SELECT * FROM tbl_memberInfo;
-    </select>
+<!--<mapper namespace="org.joinup.app.mapper.MemberMapper">-->
+<!--    <select id="getMember" resultType="MemberVO">-->
+<!--        SELECT * FROM tbl_memberInfo;-->
+<!--    </select>-->
+
+<!--</mapper>-->
+<mapper namespace="Member">
+    <insert id="save" parameterType="org.joinup.app.domain.MemberVO">
+        insert into member_table(memberEmail,memberPassword,memberName)
+        values (#{memberEmail},#{memberPassword},#{memberName});
+    </insert>
 </mapper>

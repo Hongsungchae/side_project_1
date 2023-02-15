@@ -3,13 +3,15 @@ package org.joinup.app.domain;
 import lombok.*;
 
 @Getter
+@Setter
 @ToString
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class MemberVO {
-    private Long user_no;
-    private String user_id;
-    private String user_pw;
+    private Long id;
+    private String memberEmail;
+    private String memberPassword;
+    private String memberName;
 
 }
