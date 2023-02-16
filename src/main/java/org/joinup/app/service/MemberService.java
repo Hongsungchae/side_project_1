@@ -56,4 +56,13 @@ public class MemberService {
         }
 
     }
+
+    public String emailCheck(String memberEmail) {
+        MemberVO memberVO = memberRepository.findByid(memberEmail);
+        if(memberVO == null){
+            return "ok";
+        }else{
+            return "no";
+        }
+    }
 }
