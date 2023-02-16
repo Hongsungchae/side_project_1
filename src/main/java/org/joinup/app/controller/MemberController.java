@@ -45,7 +45,7 @@ public class MemberController {
             session.setAttribute("loginEmail", memberVO.getMemberEmail());
             session.setAttribute("loginId",memberVO.getId());
 
-            memberVO = memberService.findByID((String)(session.getAttribute("loginEmail")));
+            memberVO = memberService.findByMemberEmail((String)(session.getAttribute("loginEmail")));
             System.out.println("loginEmail 세션 : " + session.getAttribute("loginEmail"));
             return "index";
         }else {
@@ -64,7 +64,7 @@ public class MemberController {
     @GetMapping("/setting")
     public String setting(HttpSession session,Model model) {
         String loginEmail = (String)(session.getAttribute("loginEmail"));
-        MemberVO memberVO = memberService.findByID(loginEmail);
+        MemberVO memberVO = memberService.findByMemberEmail(loginEmail);
         model.addAttribute("member", memberVO);
         System.out.println("setting" + memberVO);
         System.out.println();
@@ -85,7 +85,7 @@ public class MemberController {
     public String updateForm(@ModelAttribute MemberVO memberVO){
         //세션에서 나의 이메일 가져오기
         String loginEmail = (String)(memberVO.getMemberEmail());
-        memberVO.setId((memberService.findByID(loginEmail)).getId());
+        memberVO.setId((memberService.findByMemberEmail(loginEmail)).getId());
         System.out.println(memberVO);
         boolean result = memberService.update(memberVO);
         if(result){
@@ -105,5 +105,11 @@ public class MemberController {
         System.out.println("memberEmail" + memberEmail);
         String checkResult = memberService.emailCheck(memberEmail);
         return checkResult;
+    }
+    @PostMapping("/name-check")
+    public @ResponseBody String namecheck(@RequestParam("memberName")String memberName){
+        System.out.println("memberEmail" + memberName);
+        String checkNameResult = memberService.nameCheck(memberName);
+        return checkNameResult;
     }
 }

@@ -22,6 +22,9 @@
     <select id="findByMemberEmail" parameterType="String" resultType="org.joinup.app.domain.MemberVO">
         select * from member_table where memberEmail = #{loginEmail}
     </select>
+    <select id="findByMemberName" parameterType="String" resultType="org.joinup.app.domain.MemberVO">
+        select * from member_table where memberName = #{memberName}
+    </select>
     <update id="update" parameterType="org.joinup.app.domain.MemberVO">
         update member_table set memberName = #{memberName}, memberPassword = #{memberPassword}
         where id = #{id}

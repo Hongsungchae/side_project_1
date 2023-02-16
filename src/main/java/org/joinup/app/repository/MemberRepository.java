@@ -20,14 +20,16 @@ public class MemberRepository {
         return sql.selectOne("Member.login", memberVO);
     }
 
-    public MemberVO findByid(String email) {
-        return sql.selectOne("Member.findById", email);
-    }
+//    public MemberVO findByid(String email) {
+//        return sql.selectOne("Member.findById", email);
+//    }
 
     public MemberVO findByMemberEmail(String loginEmail) {
         return sql.selectOne("Member.findByMemberEmail",loginEmail);
     }
-
+    public MemberVO findByMemberName(String memberName) {
+        return sql.selectOne("Member.findByMemberName",memberName);
+    }
     public int update(MemberVO memberVO) {
 
         return sql.update("Member.update",memberVO);

@@ -56,6 +56,7 @@
                         </div>
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control" name = "memberName" id="floatingText" placeholder="jhondoe">
+                            <p id="name-result"></p>
                             <label for="floatingText">Username</label>
                         </div>
                         <div class="form-floating mb-3">
@@ -87,7 +88,9 @@
         const emailCheck = () => {
             //이메일 입력값을 갑져오고 입력값을 서버로 전송하고 똑같은 이메일이 있는 지 체크한 후 사용가능 여부를 아래에 표시
             const email = document.getElementById("floatingInput").value;
+            const name = document.getElementById("floatingText").value;
             const checkResult = document.getElementById("check-result");
+            const checknameResult = document.getElementById("name-result");
             console.log("입력한 이메일",email);
             const target = document.getElementById('singup-btn');
             $.ajax({
@@ -109,6 +112,30 @@
                         target.disabled = true;
                         checkResult.style.color="red";
                         checkResult.innerHTML="사용불가능한 이메일";
+                    }
+                },error:function (err) {
+                    console.log("에럽라생", err);
+                }
+            })
+            $.ajax({
+                //요청 방식 : post, url : "email-check", 데이터 : 이메일
+                type : "post",
+                url:"/name-check",
+                data :{
+                    "memberName":name
+                },
+                success:function (res){
+                    console.log("요청 성공",res);
+                    if(res =="ok"){
+                        console.log("사용 가능한 이메일");
+                        target.disabled = false;
+                        checknameResult.style.color="green";
+                        checknameResult.innerHTML="사용가능한 이메일";
+                    }else{
+                        console.log("이미 사용중인 이메일")
+                        target.disabled = true;
+                        checknameResult.style.color="red";
+                        checknameResult.innerHTML="사용불가능한 이메일";
                     }
                 },error:function (err) {
                     console.log("에럽라생", err);

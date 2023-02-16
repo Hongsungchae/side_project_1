@@ -38,9 +38,9 @@ public class MemberService {
 
     }
 
-    public MemberVO findByID(String email) {
-        return memberRepository.findByid(email);
-    }
+//    public MemberVO findByID(String email) {
+//        return memberRepository.findByid(email);
+//    }
 
     public MemberVO findByMemberEmail(String loginEmail) {
         return memberRepository.findByMemberEmail(loginEmail);
@@ -58,7 +58,15 @@ public class MemberService {
     }
 
     public String emailCheck(String memberEmail) {
-        MemberVO memberVO = memberRepository.findByid(memberEmail);
+        MemberVO memberVO = memberRepository.findByMemberEmail(memberEmail);
+        if(memberVO == null){
+            return "ok";
+        }else{
+            return "no";
+        }
+    }
+    public String nameCheck(String memberName) {
+        MemberVO memberVO = memberRepository.findByMemberName(memberName);
         if(memberVO == null){
             return "ok";
         }else{
