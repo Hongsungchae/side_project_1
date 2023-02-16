@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.joinup.app.domain.MemberVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.ui.Model;
 
 @Repository
 @RequiredArgsConstructor
@@ -21,5 +22,14 @@ public class MemberRepository {
 
     public MemberVO findByid(String email) {
         return sql.selectOne("Member.findById", email);
+    }
+
+    public MemberVO findByMemberEmail(String loginEmail) {
+        return sql.selectOne("Member.findByMemberEmail",loginEmail);
+    }
+
+    public int update(MemberVO memberVO) {
+
+        return sql.update("Member.update",memberVO);
     }
 }

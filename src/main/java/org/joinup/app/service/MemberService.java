@@ -6,7 +6,9 @@ import org.joinup.app.mapper.MemberMapper;
 import org.joinup.app.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
+import java.lang.reflect.Member;
 import java.util.List;
 
 @Service
@@ -38,5 +40,20 @@ public class MemberService {
 
     public MemberVO findByID(String email) {
         return memberRepository.findByid(email);
+    }
+
+    public MemberVO findByMemberEmail(String loginEmail) {
+        return memberRepository.findByMemberEmail(loginEmail);
+
+    }
+
+    public boolean update(MemberVO memberVO) {
+        int result = memberRepository.update(memberVO);
+        if(result>0){
+            return true;
+        }else{
+            return false;
+        }
+
     }
 }

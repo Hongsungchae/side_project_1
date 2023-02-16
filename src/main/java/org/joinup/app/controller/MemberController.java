@@ -7,14 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.lang.reflect.Member;
 import java.util.List;
-import java.util.Objects;
 
 @Controller
 @RequiredArgsConstructor
@@ -48,19 +43,32 @@ public class MemberController {
         boolean loginResult = memberService.login(memberVO);
         if(loginResult){
             session.setAttribute("loginEmail", memberVO.getMemberEmail());
-            session.setAttribute("loginid",memberVO.getId());
-            System.out.println(session.getAttribute("loginid"));
+            session.setAttribute("loginId",memberVO.getId());
+
+            memberVO = memberService.findByID((String)(session.getAttribute("loginEmail")));
+            System.out.println("loginEmail 세션 : " + session.getAttribute("loginEmail"));
             return "index";
         }else {
             return "signin";
         }
 
     }
-    @GetMapping("/profile")
-    public String profile(@ModelAttribute MemberVO memberVO, HttpSession session) {
-        memberVO = memberService.findByID((String)(session.getAttribute("loginEmail")));
-        session.setAttribute("memberName",memberVO.getMemberName());
-        return "profile";
+//    @PostMapping("/setting")
+//    public String setting(@ModelAttribute Model model, HttpSession session) {
+//        MemberVO memberVO = memberService.findByID((String)(session.getAttribute("loginEmail")));
+//
+//        session.setAttribute("memberName 세션 이름 : ",memberVO.getMemberName());
+//        model.addAttribute("member", memberVO);
+//        return "setting";
+//    }
+    @GetMapping("/setting")
+    public String setting(HttpSession session,Model model) {
+        String loginEmail = (String)(session.getAttribute("loginEmail"));
+        MemberVO memberVO = memberService.findByID(loginEmail);
+        model.addAttribute("member", memberVO);
+        System.out.println("setting" + memberVO);
+        System.out.println();
+        return "setting";
     }
     @GetMapping("/signin")
     public String signin() {
@@ -73,6 +81,24 @@ public class MemberController {
 
         return "signup";
     }
+    @PostMapping("/update")
+    public String updateForm(@ModelAttribute MemberVO memberVO){
+        //세션에서 나의 이메일 가져오기
+        String loginEmail = (String)(memberVO.getMemberEmail());
+        memberVO.setId((memberService.findByID(loginEmail)).getId());
+        System.out.println(memberVO);
+        boolean result = memberService.update(memberVO);
+        if(result){
+            return "index";
+        }else{
+            return "setting";
+        }
 
+    }
+    @GetMapping("/update")
+    public String update() {
+
+        return "setting";
+    }
 
 }

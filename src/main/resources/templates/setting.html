@@ -31,7 +31,7 @@
 </head>
 
 <body>
-<form action="profile" method="post">
+<form action="update" method="post">
     <div class="container-xxl position-relative bg-white d-flex p-0">
         <!-- Spinner Start -->
         <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
@@ -54,26 +54,24 @@
                             <h3>Sign Up</h3>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" name = "memberName" id="floatingText" placeholder="jhondoe">
+                            <input type="text" class="form-control" name = "memberName"  th:value="${member?.memberName}" id="floatingText" >
                             <label for="floatingText">Username</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="email" class="form-control" name = "memberEmail" id="floatingInput" placeholder="name@example.com">
+                            <input type="email" class="form-control" name = "memberEmail" th:value="${member?.memberEmail}" id="floatingInput" readonly placeholder="name@example.com">
                             <label for="floatingInput">Email address</label>
                         </div>
                         <div class="form-floating mb-4">
-                            <p type="password" class="form-control" name = "memberPassword"id="floatingPassword" placeholder="Password"> ${member.memberPassword}</p>
+                            <input type="password" class="form-control" name = "memberPassword"id="floatingPassword" placeholder="Password"> </input>
                                 <label for="floatingPassword">Password</label>
                         </div>
                         <div class="d-flex align-items-center justify-content-between mb-4">
                             <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                <label class="form-check-label" for="exampleCheck1">Check me out</label>
                             </div>
-                            <a href="">Forgot Password</a>
+
                         </div>
-                        <button type="submit" class="btn btn-primary py-3 w-100 mb-4">Sign Up</button>
-                        <p class="text-center mb-0">Already have an Account? <a href="">Sign In</a></p>
+                        <input type="submit" value = "변경" class="btn btn-primary py-3 w-100 mb-4"></input>
+                        <p class="text-center mb-0">Already have an Account? <a href="/index">메인페이지로</a></p>
                     </div>
                 </div>
             </div>
