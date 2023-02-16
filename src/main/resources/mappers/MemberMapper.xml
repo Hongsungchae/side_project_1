@@ -16,7 +16,7 @@
     <select id="login" parameterType="org.joinup.app.domain.MemberVO" resultType="org.joinup.app.domain.MemberVO">
         select * from member_table where memberEmail = #{memberEmail} and memberPassword=#{memberPassword}
     </select>
-    <select id="findById" parameterType="Long" resultType="org.joinup.app.domain.MemberVO">
-        select * from member_table where id = #{id}
+    <select id="findById" parameterType="String" resultType="org.joinup.app.domain.MemberVO">
+        select * from member_table where memberEmail = #{email}
     </select>
 </mapper>

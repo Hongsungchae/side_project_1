@@ -19,7 +19,7 @@ public class MemberRepository {
         return sql.selectOne("Member.login", memberVO);
     }
 
-    public MemberVO findByid(Long id) {
-        return sql.selectOne("Member.findById", id);
+    public MemberVO findByid(String email) {
+        return sql.selectOne("Member.findById", email);
     }
 }

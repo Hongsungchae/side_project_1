@@ -36,7 +36,7 @@ public class MemberService {
 
     }
 
-    public MemberVO findByID(Long id) {
-        return memberRepository.findByid(id);
+    public MemberVO findByID(String email) {
+        return memberRepository.findByid(email);
     }
 }

@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.lang.reflect.Member;
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 @RequiredArgsConstructor
@@ -48,6 +49,7 @@ public class MemberController {
         if(loginResult){
             session.setAttribute("loginEmail", memberVO.getMemberEmail());
             session.setAttribute("loginid",memberVO.getId());
+            System.out.println(session.getAttribute("loginid"));
             return "index";
         }else {
             return "signin";
@@ -56,7 +58,7 @@ public class MemberController {
     }
     @GetMapping("/profile")
     public String profile(@ModelAttribute MemberVO memberVO, HttpSession session) {
-        memberVO = memberService.findByID(Long.parseLong(session.getId()));
+        memberVO = memberService.findByID((String)(session.getAttribute("loginEmail")));
         session.setAttribute("memberName",memberVO.getMemberName());
         return "profile";
     }
