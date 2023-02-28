@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <title>DASHMIN - Bootstrap Admin Template</title>
@@ -182,92 +181,27 @@
 
 
             <!-- Form Start -->
-            <div class="container-fluid pt-4 px-4">
-                <div class="row g-4">
-                    <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label">프로젝트 제목</label>
-                        <input class="form-control" name = "boardTitle" id="exampleFormControlInput1" placeholder="제목을 입력하세요">
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleFormControlTextarea1"  class="form-label">프로젝트 설명</label>
-                        <textarea class="form-control" name="boardContents" id="exampleFormControlTextarea1" rows="3"></textarea>
-                    </div>
-
-                    <p>프로젝트 시작 날짜</p>
-                    <div class="row align-items-start">
-                        <div class="col">
-                            <div class = "year">
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected>Month</option>
-                                <option value=" ">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class = "month">
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected>Year</option>
-                                <option value="1">1월</option>
-                                <option value="2">2월</option>
-                                <option value="3">3월</option>
-                                <option value="4">4월</option>
-                                <option value="5">5월</option>
-                                <option value="6">6월</option>
-                                <option value="7">7월</option>
-                                <option value="8">8월</option>
-                                <option value="9">9월</option>
-                                <option value="10">10월</option>
-                                <option value="11">11월</option>
-                                <option value="12">12월</option>
-                            </select>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected>Day</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
-                        </div>
-                    </div>
-                    <p>프로젝트 종료 날짜(예상)</p>
-                    <div class="row align-items-start">
-                        <div class="col">
-                            <select class="form-select" aria-label="Default select example">
-                                <option value="1">One</option>
-                            </select>
-                        </div>
-                        <div class="col">
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected>Month</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
-                        </div>
-                        <div class="col">
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected>Day</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div>
-                        <label for="formFileLg" class="form-label">당신의 프로젝트 계획서를 올리세요</label>
-                        <input class="form-control form-control-lg" id="formFileLg" type="file">
-                    </div>
-                </div>
-                <br>
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">삭제할 비밀번호</label>
-                    <input  class="form-control" name = "boardPass" id="" placeholder="삭제할 비밀번호">
-                </div>
-                </div>
+            <table>
+                <tr>
+                    <th>id</th>
+                    <th>title</th>
+                    <th>writer</th>
+                    <th>date</th>
+                    <th>hits</th>
+                </tr>
+                <h1 th:text="${memberList}"></h1>
+                <c:forEach items="${boardList}" var="board">
+                    <tr>
+                        <td>${board.id}</td>
+                        <td>
+                            <a href="/board?id=${board.id}">${board.boardTitle}</a>
+                        </td>
+                        <td>${board.boardWriter}</td>
+                        <td>${board.boardCreatedTime}</td>
+                        <td>${board.boardHits}</td>
+                    </tr>
+                </c:forEach>
+            </table>
 
             <!-- Form End -->
 
