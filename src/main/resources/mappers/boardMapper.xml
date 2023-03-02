@@ -6,7 +6,13 @@
         insert into board_table(boardWriter,boardPass,BoardTitle, BoardContents)
         values (#{boardWriter},#{boardPass},#{boardTitle},#{boardContents});
     </insert>
-    <select id="findAll" resultType="board">
-        select * from board_table order by id desc
+    <select id="findAll" resultType="org.joinup.app.domain.BoardDTO">
+        select * from board_table order by id desc;
     </select>
+    <select id="findById" parameterType="Long" resultType="org.joinup.app.domain.BoardDTO">
+        select * from board_table where id = #{id};
+    </select>
+    <update id="updateHits" parameterType="Long">
+        update board_table set boardHits=boardHits +1 where id=#{id}
+    </update>
 </mapper>

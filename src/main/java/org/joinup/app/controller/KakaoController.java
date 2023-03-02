@@ -21,7 +21,6 @@ import java.util.UUID;
 
 @Controller
 @RequiredArgsConstructor
-
 public class KakaoController {
     @GetMapping("/kakao/callback")
     public @ResponseBody String kakaoLogin(String code){//Data를 리턴해주는 컨트롤러함수

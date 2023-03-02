@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <title>DASHMIN - Bootstrap Admin Template</title>
@@ -31,7 +32,7 @@
 </head>
 
 <body>
-<form action="/board" method="post">
+<form action="/boardWrite" method="post">
     <div class="container-xxl position-relative bg-white d-flex p-0">
         <!-- Spinner Start -->
         <div id="spinner"
@@ -188,28 +189,33 @@
 
 
             <!-- Form Start -->
-            <table  class="container-fluid pt-4 px-4" >
-                <div >
-                    <tr>
-                        <th>id</th>
-                        <th>title</th>
-                        <th>writer</th>
-                        <th>date</th>
-                        <th>자세히보기</th>
-                        <th>hits</th>
-                    </tr>
-                    <tr th:each="list:${boardList}">
-                        <td th:text="${list.id}"></td>
-                        <td th:text="${list.boardTitle}"></td>
-                        <td th:text="${list.boardWriter}"></td>
-                        <td th:text="${list.boardCreatedTime}"></td>
-                        <td>
-                            <a th:href="@{/detail(id=${list.id})}">이동하기</a>
-                        </td>
-                        <td th:text="${list.boardHits}"></td>
-                    </tr>
+            <div class="container-fluid pt-4 px-4">
+                <div class="row g-4">
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">프로젝트 제목</label>
+                        <p  name="boardTitle" id="exampleFormControlInput1"
+                           th:text = "${board.boardTitle}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlTextarea1" class="form-label">프로젝트 설명</label>
+                        <textarea class="form-control" name="boardContents" id="exampleFormControlTextarea1"
+                                  th:text = "${board.boardContents}" readonly rows="3"></textarea>
+                    </div>
+
+                    <p>프로젝트 시작 날짜</p>
+
+
+                    <div>
+                        <label for="formFileLg" class="form-label">당신의 프로젝트 계획서를 올리세요</label>
+                        <input class="form-control form-control-lg" id="formFileLg" type="file">
+                    </div>
                 </div>
-            </table>
+                <br>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">삭제할 비밀번호</label>
+                    <input class="form-control" name="boardPass" id="" placeholder="삭제할 비밀번호">
+                </div>
+            </div>
 
             <!-- Form End -->
 
@@ -228,6 +234,8 @@
                     </div>
                 </div>
             </div>
+            <button type="submit" class="btn btn-primary py-3 w-100 mb-4">수정하기</button>
+            <button type="submit" class="btn btn-primary py-3 w-100 mb-4">목록으로</button>
             <button type="submit" class="btn btn-primary py-3 w-100 mb-4">등록하기</button>
             <!-- Footer End -->
         </div>

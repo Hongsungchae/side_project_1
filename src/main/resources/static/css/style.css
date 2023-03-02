@@ -152,7 +152,11 @@
 .sidebar .navbar .navbar-nav .nav-link.active i {
     background: var(--light);
 }
-
+#spacearound{
+    justify-content: space-around;
+    table-layout: fixed;
+    flex: 1;
+}
 .sidebar .navbar .dropdown-toggle::after {
     position: absolute;
     top: 15px;
