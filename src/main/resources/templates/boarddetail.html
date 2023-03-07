@@ -32,7 +32,7 @@
 </head>
 
 <body>
-<form action="/boardWrite" method="post">
+<form action="/detail">
     <div class="container-xxl position-relative bg-white d-flex p-0">
         <!-- Spinner Start -->
         <div id="spinner"
@@ -234,9 +234,9 @@
                     </div>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary py-3 w-100 mb-4">수정하기</button>
-            <button type="submit" class="btn btn-primary py-3 w-100 mb-4">목록으로</button>
-            <button type="submit" class="btn btn-primary py-3 w-100 mb-4">등록하기</button>
+            <button onclick="updatefn()" class="btn btn-primary py-3 w-100 mb-4">수정하기</button>
+            <button onclick="location.href='/index'" class="btn btn-primary py-3 w-100 mb-4">목록으로</button>
+            <button  onclick="deletefn()" class="btn btn-primary py-3 w-100 mb-4">등록하기</button>
             <!-- Footer End -->
         </div>
         <!-- Content End -->
@@ -256,7 +256,17 @@
     <script src="lib/tempusdominus/js/moment.min.js"></script>
     <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
     <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+    <script>
+        function updatefn(){
+            const id = '${board.id}';
+            location.href="/board/update?id"+id;
+        }
+        function deletefn(){
+            const id = '${board.id}';
+            location.href="/board/delete?id"+id;
+        }
 
+    </script>
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
 </form>
